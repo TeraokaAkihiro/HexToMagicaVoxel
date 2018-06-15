@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="UTF-8">
+  <title>HEX to MagicaVoxel</title>
+  <link rel="stylesheet" href="./html5reset-1.6.1.css">
+  <link rel="stylesheet" href="./style.css">
+  <script language="javascript" type="text/javascript">
+    function OnButtonClick(type) {
+      if(tupe = 'hex'){
+      var hex = document.convert.htm_hex.value;
+      var magicavoxel = ConvertHexToMagicaVoxel(hex);
+      document.convert.htm_magicavoxel.value = magicavoxel;
+      }
+    }
+    function ConvertHexToMagicaVoxel(hex){
+      var formatHex = FormatHex(hex);
+      var magicavoxel = '';
+      if(formatHex.length === 6){
+        for(i=0; i<6; i+=2){
+          magicavoxel += parseInt(formatHex[i]+formatHex[i+1],16);
+          if(i<4){
+            magicavoxel += ' ';
+          }
+        }
+      }
+      return magicavoxel;
+    }
+    function FormatHex(hex){
+      var formatHex = '';
+      for(i=0; i<hex.length; i++){
+        if(!(hex[i].match(/[^A-Fa-f0-9]+/))){
+          formatHex += hex[i];
+        }
+      }
+      return formatHex;
+    }
+  </script>
+</head>
+<body>
+  <h1>HEX to MagicaVoxel</h1>
+  <form name="convert">
+    <p>HEX<br><input type="text" name="htm_hex"></p>
+    <input type="button" value="変換" onclick="OnButtonClick('hex');"><br>
+    <p>MagicaVoxel<br><input type="text" name="htm_magicavoxel"></p>
+  </form>
+</body>
+</html>
